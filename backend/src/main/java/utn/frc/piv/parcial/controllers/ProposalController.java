@@ -19,6 +19,7 @@ import utn.frc.piv.parcial.dtos.VoteResponseDTO;
 import utn.frc.piv.parcial.entities.Proposal;
 import utn.frc.piv.parcial.entities.Vote;
 import utn.frc.piv.parcial.exceptions.ErrorResponse;
+import utn.frc.piv.parcial.services.GreetingsClientService;
 import utn.frc.piv.parcial.services.ProposalService;
 import utn.frc.piv.parcial.services.VoteService;
 
@@ -35,6 +36,7 @@ public class ProposalController {
 
     private final ProposalService proposalService;
     private final VoteService voteService;
+    private final GreetingsClientService greetingsClientService;
 
     @Operation(summary = "Obtener todas las propuestas activas", 
                description = "Devuelve todas las propuestas activas ordenadas por fecha de inicio ascendente")
@@ -134,5 +136,17 @@ public class ProposalController {
                 .build();
         
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @Operation(summary = "Obtener saludo del servicio externo",
+               description = "Llama al servicio greetings-be y devuelve su respuesta")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Saludo obtenido exitosamente",
+                    content = @Content(mediaType = "application/json"))
+    })
+    @GetMapping("/greetings")
+    public ResponseEntity<String> getExternalGreeting() {
+        String greeting = greetingsClientService.fetchGreeting();
+        return ResponseEntity.ok(greeting);
     }
 }
