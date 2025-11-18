@@ -1,0 +1,68 @@
+services:
+  users-bd:
+    image: mysql:8.0
+    container_name: parcial-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: parcial_db
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - parcial-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  users-be:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: parcial-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://users-bd:3306/parcial_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: usuario
+      SPRING_DATASOURCE_PASSWORD: password123
+    depends_on:
+      users-bd:
+        condition: service_healthy
+    networks:
+      - parcial-network
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: parcial-frontend
+    depends_on:
+      - users-be
+    networks:
+      - parcial-network
+
+  nginx:
+    image: nginx:latest
+    container_name: reverse_proxy
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+    ports:
+      - "80:80"
+      - "8080:8080"
+    networks:
+      - parcial-network
+    depends_on:
+      - frontend
+      - users-be
+
+volumes:
+  mysql_data:
+
+networks:
+  parcial-network:
+    driver: bridge
