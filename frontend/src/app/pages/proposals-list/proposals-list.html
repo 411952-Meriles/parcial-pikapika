@@ -1,0 +1,26 @@
+<div *ngIf="!isViewingDetail" class="proposals-container">
+  <div class="proposals-header">
+    <h1 class="proposals-title">Sistema de Votaciones</h1>
+    <button mat-raised-button class="new-proposal-btn" routerLink="/proposals/new">
+      Nueva Propuesta
+    </button>
+  </div>
+  <div class="proposals-card">
+    <app-generic-table 
+      [data]="(proposals$ | async) || []" 
+      [displayedColumns]="displayedColumns"
+      [columnHeaders]="columnHeaders"
+      (actionClicked)="handleAction($event)">
+    </app-generic-table>
+  </div>
+</div>
+
+<div *ngIf="isViewingDetail" class="proposals-container">
+  <div class="detail-header">
+    <h1 class="proposals-title">Detalle de Propuesta</h1>
+    <button class="back-button" (click)="hideDetail()">
+      Volver a la lista
+    </button>
+  </div>
+  <app-generic-card [selectedProposal]="proposalForDetail"></app-generic-card>
+</div>

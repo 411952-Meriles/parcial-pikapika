@@ -1,0 +1,66 @@
+<mat-card *ngIf="selectedProposal">
+  <mat-card-header>
+    <mat-card-title>{{ selectedProposal.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <strong>Descripción:</strong> {{ selectedProposal.description }}
+    </p>
+    <p>
+      <strong>Fecha de Inicio:</strong> {{ selectedProposal.startDate | date: 'dd/MM/yyyy HH:mm' }}
+    </p>
+    <p>
+      <strong>Fecha de Fin:</strong> {{ selectedProposal.endDate | date: 'dd/MM/yyyy HH:mm' }}
+    </p>
+
+    <!-- Formulario de votación si la propuesta está abierta -->
+    <div *ngIf="isProposalOpen() && hasProposalStarted()" class="voting-section">
+      <h3>Emitir Voto</h3>
+      <form [formGroup]="voteForm" (ngSubmit)="onSubmitVote()" class="vote-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Número de cliente</mat-label>
+          <input matInput type="number" formControlName="userId" placeholder="Ingrese su número de cliente">
+          <mat-error *ngIf="voteForm.get('userId')?.hasError('required')">
+            El número de cliente es obligatorio
+          </mat-error>
+          <mat-error *ngIf="voteForm.get('userId')?.hasError('pattern')">
+            El número de cliente debe ser un número válido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tu Voto</mat-label>
+          <mat-select formControlName="vote">
+            <mat-option *ngFor="let voteType of voteTypes" [value]="voteType">
+              {{ voteType | voteType }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="voteForm.get('vote')?.hasError('required')">
+            Debe seleccionar un tipo de voto
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" [disabled]="voteForm.invalid || isSubmitting" class="submit-button">
+          {{ isSubmitting ? 'Enviando...' : 'Emitir Voto' }}
+        </button>
+
+        <div *ngIf="voteMessage" class="vote-message" [ngClass]="voteMessageType">
+          {{ voteMessage }}
+        </div>
+      </form>
+    </div>
+
+    <!-- Resultado si la propuesta está cerrada -->
+    <div *ngIf="!isProposalOpen() && hasProposalStarted()" class="results-section">
+      <h3>Resultado Final</h3>
+      <div class="result-card" [ngClass]="getResultClass()">
+        <div class="result-icon">{{ getResultIcon() }}</div>
+        <div class="result-text">{{ getResultText() | proposalResult }}</div>
+        <div class="vote-counts">
+          <span class="positive-votes">Positivos: {{ selectedProposal.positiveVotes || 0 }}</span>
+          <span class="negative-votes">Negativos: {{ selectedProposal.negativeVotes || 0 }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

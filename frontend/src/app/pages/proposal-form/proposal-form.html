@@ -1,0 +1,89 @@
+<div class="proposal-form-container">
+  <div class="form-header">
+    <h1 class="form-title">Nueva Propuesta</h1>
+    <button mat-button class="cancel-button" (click)="onCancel()">
+      Volver a la lista
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()" class="proposal-form">
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="title" placeholder="Ingrese el título de la propuesta">
+          <mat-error *ngIf="getFieldError('title')">
+            {{ getFieldError('title') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" rows="4" placeholder="Ingrese la descripción de la propuesta"></textarea>
+          <mat-error *ngIf="getFieldError('description')">
+            {{ getFieldError('description') }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="date-time-group">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Fecha de Inicio</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+            <mat-error *ngIf="getFieldError('startDate')">
+              {{ getFieldError('startDate') }}
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="time-field">
+            <mat-label>Hora de Inicio</mat-label>
+            <input matInput type="time" formControlName="startTime">
+            <mat-error *ngIf="getFieldError('startTime')">
+              {{ getFieldError('startTime') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="date-time-group">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Fecha de Fin</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+            <mat-error *ngIf="getFieldError('endDate')">
+              {{ getFieldError('endDate') }}
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="time-field">
+            <mat-label>Hora de Fin</mat-label>
+            <input matInput type="time" formControlName="endTime">
+            <mat-error *ngIf="getFieldError('endTime')">
+              {{ getFieldError('endTime') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="getFormError()" class="form-error">
+          {{ getFormError() }}
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="onCancel()" class="cancel-btn">
+            Cancelar
+          </button>
+          <button mat-raised-button type="submit" [disabled]="proposalForm.invalid || isSubmitting" class="submit-btn">
+            {{ isSubmitting ? 'Creando...' : 'Crear Propuesta' }}
+          </button>
+        </div>
+
+        <div *ngIf="submitMessage" class="submit-message" [ngClass]="submitMessageType">
+          {{ submitMessage }}
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

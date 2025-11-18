@@ -1,0 +1,305 @@
+/* Container principal */
+.proposals-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Header de las propuestas */
+.proposals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.proposals-title {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.new-proposal-btn {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 1rem 2rem !important;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.new-proposal-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Card container para la tabla */
+.proposals-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proposals-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+/* Estilos de la tabla */
+.proposals-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header de la tabla */
+.proposals-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.proposals-table th {
+  padding: 1.5rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 3px solid rgba(255,255,255,0.2);
+}
+
+/* Filas de la tabla */
+.proposals-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.proposals-table tbody tr:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  transform: scale(1.01);
+}
+
+.proposals-table td {
+  padding: 1.2rem 1rem;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Título de propuesta */
+.proposal-title {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+/* Descripción */
+.proposal-description {
+  color: #5a6c7d;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+/* Fechas */
+.proposal-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Botón de acción */
+.action-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .proposals-container {
+    padding: 1rem;
+  }
+  
+  .proposals-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .proposals-table th,
+  .proposals-table td {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .proposal-description {
+    max-width: 200px;
+  }
+  
+  .action-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.proposals-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efectos de hover mejorados */
+.proposals-table tbody tr {
+  position: relative;
+  overflow: hidden;
+}
+
+.proposals-table tbody tr::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.proposals-table tbody tr:hover::before {
+  left: 100%;
+}
+
+/* Indicadores de estado */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-active {
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.status-inactive {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.status-pending {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+/* Estilos para la vista de detalle */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.back-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive para vista de detalle */
+@media (max-width: 768px) {
+  .proposals-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .proposals-title {
+    font-size: 2rem;
+  }
+  
+  .new-proposal-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .back-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}

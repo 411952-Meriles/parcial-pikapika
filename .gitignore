@@ -1,33 +1,126 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-### STS ###
-.apt_generated
+# ========================================================
+# GITIGNORE UNIVERSAL - BACKEND JAVA SPRING BOOT + ANGULAR
+# Para desarrollos con Maven, Angular 18 y uso local
+# Soporte para editores JetBrains (IntelliJ) y VS Code
+# ========================================================
+
+#####################################
+# BACKEND JAVA (SPRING BOOT / MAVEN)
+#####################################
+
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+# maven local repository (por si hay m2 stuck en proyecto)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Archivos de logs, dumps y caches
+*.log
+*.tmp
+hs_err_pid*
+rebel.xml
+
+# IDE files
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+.settings/
+bin/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+##########################
+# FRONTEND ANGULAR
+##########################
+
+# Node modules y salida de build
+node_modules/
+dist/
+.angular/
+.angular/cache/
+out-tsc/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE – Angular
+.tmp
+.idea/
 .vscode/
+.DS_Store
+
+##########################
+# EDITORES Y ENTORNOS
+##########################
+
+# JetBrains (IntelliJ IDEA, WebStorm, etc)
+/.idea/
+/*.iml
+*.iws
+/out/
+
+# VSCode
+.vscode/
+
+##########################
+# SISTEMA
+##########################
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Linux
+*~
+.*.swp
+.swo
+.swn
+
+##########################
+# AMBIENTES / VARS
+##########################
+
+# Entornos
+.env
+.env.*
+
+
+# Otros archivos ocultos o temporales que aparecen a veces
+*.sublime-workspace
+*.sublime-project
+*.log
+*.tmp
+*.bak
+
+##########################
+# ARCHIVOS DE SEGURIDAD/CLAVE
+##########################
+*.key
+*.pem
+*.crt
+*.jks
+
+##########################
+# BASE DE DATOS EMBEBIDAS
+##########################
+# H2 database (si los alumnos lo usan local y se genera archivo)
+*.h2.db
+*.mv.db
+
+##########################################################
+# FIN
+##########################################################

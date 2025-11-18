@@ -1,0 +1,5 @@
+export enum VoteType {
+  POSITIVE = 'POSITIVE',
+  NEGATIVE = 'NEGATIVE',
+  ABSTENCY = 'ABSTENCY'
+}
